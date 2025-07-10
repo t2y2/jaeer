@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>discord.gg/8bx</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Courier New', Courier, monospace;
+      color: #ff0000;
+    }
+    .loading, .main {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    .loading {
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .progress-container {
+      width: 350px;        /* أعرض قليلاً */
+      height: 20px;        /* أعلى قليلاً */
+      background: rgba(255, 0, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 30px;    /* مسافة أكبر عن النص */
+    }
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: red;
+      animation: fill 2.5s linear forwards;
+    }
+    @keyframes fill {
+      0%   { width: 0; }
+      100% { width: 100%; }
+    }
+    .main {
+      display: none;
+    }
+    .image-container img {
+      width: 350px;
+      border: 2px solid #ff0000;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    }
+    .info {
+      margin-top: 20px;
+      font-size: 1.5em;
+      text-shadow: 0px 0px 8px #ff0000, 0px 0px 15px #f70808, 0px 0px 25px #ff0000;
+      letter-spacing: 4.5px;
+      white-space: pre-wrap;
+    }
+    .hwid {
+      font-size: 0.4em;
+      word-break: break-word;
+      max-width: 90vw;
+    }
+    .text a {
+      font-size: 3.2em;    /* كبّر الرابط قليلاً */
+      color: #ff0000;
+      text-shadow: 0px 0px 8px #ff0000, 0px 0px 15px #ff0000;
+      text-decoration: none;
+      letter-spacing: 4px;
+      margin-top: 20px;
+    }
+    .loading p {
+      margin-top: 15px;
+      font-size: 1.6em;    /* كبّر "لا تنسى تخش الديسكورد" */
+      direction: rtl;
+    }
+    .loading .invite {
+      font-size: 2.5em;    /* كبّر "discord.gg/8bx" */
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الصوت يبدأ فورًا -->
+  <audio autoplay loop>
+    <source src="https://cdn.discordapp.com/attachments/1344700524590661633/1392548629536964789/-_.mp3?ex=686fef79&is=686e9df9&hm=0a43bc1faa92597e61f9bc2c7f4a45648a9857ad4eeaf8864d997d7bd6fbd6a2&" type="audio/mpeg">
+  </audio>
+
+  <!-- شاشة التحميل -->
+  <div class="loading" id="loading">
+    <h1>SECURITY ALERT SAHM IN THE SYSTEM ..</h1>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+    <p class="invite">discord.gg/8bx</p>
+    <p>لا تنسى تخش الديسكورد</p>
+  </div>
+
+  <!-- الصفحة الرئيسية -->
+  <div class="main" id="main">
+    <div class="image-container">
+      <img src="https://cdn.discordapp.com/attachments/1344700524590661633/1392545870821593118/0760ad4728018ff47ee7b5cd0a4ca9d1.webp?ex=686fece7&is=686e9b67&hm=56bdd727326a06ac0c8331dd568fab6ef2ea23549bc40f6242e7852f8e48b51d&" alt="Discord GIF" />
+    </div>
+    <div class="info" id="ip-info">
+      <strong>IP: <span id="ip"></span></strong><br />
+      <span><strong>City:</strong> <span id="city"></span></span><br />
+      <span><strong>Region:</strong> <span id="region"></span></span><br />
+      <span><strong>Country:</strong> <span id="country"></span></span><br />
+      <span><strong>Location:</strong> <span id="loc"></span></span><br />
+      <span><strong>Organization:</strong> <span id="org"></span></span><br />
+      <span><strong>Timezone:</strong> <span id="timezone"></span></span><br />
+      <span><strong>GPU:</strong> <span id="gpu"></span></span><br />
+    </div>
+    <div class="text">
+      <a href="https://discord.gg/8bx" target="_blank">discord.gg/8bx</a>
+    </div>
+  </div>
+
+  <script>
+    // بعد 2.5 ثانية نخفي شاشة التحميل ونظهر المحتوى
+    setTimeout(() => {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('main').style.display = 'flex';
+    }, 2500);
+
+    // جلب معلومات IP و GPU
+    fetch('https://ipinfo.io/json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('ip').textContent = data.ip || 'N/A';
+        document.getElementById('city').textContent = data.city || 'N/A';
+        document.getElementById('region').textContent = data.region || 'N/A';
+        document.getElementById('country').textContent = data.country || 'N/A';
+        document.getElementById('loc').textContent = data.loc || 'N/A';
+        document.getElementById('org').textContent = data.org || 'N/A';
+        document.getElementById('timezone').textContent = data.timezone || 'N/A';
+        let gpu = 'N/A';
+        try {
+          const canvas = document.createElement('canvas');
+          const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+          const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+          if (dbg) gpu = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL);
+        } catch {}
+        document.getElementById('gpu').textContent = gpu;
+        // إرسال للويبهوك...
+      });
+  </script>
+
+</body>
+</html>
